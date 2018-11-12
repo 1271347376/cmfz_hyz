@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.ChapterDao">
+
+    <insert id="insert" parameterType="Chapter">
+        insert into cmfz_chapter values (#{id},#{title},#{fileSize},#{duration},#{downPath},#{uploadTime},#{album_id})
+    </insert>
+
+    <update id="update" parameterType="Chapter">
+        update cmfz_chapter set title=#{title},fileSize=#{fileSize},duration=#{duration},downPath=#{downPath},uploadTime=#{uploadTime},album_id=#{album_id} where id=#{id}
+    </update>
+
+    <delete id="deleteOne" parameterType="Chapter">
+        delete from cmfz_chapter where id=#{id}
+    </delete>
+
+</mapper>

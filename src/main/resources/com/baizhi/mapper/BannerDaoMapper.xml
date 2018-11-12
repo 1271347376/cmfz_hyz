@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.BannerDao">
+
+
+    <select id="queryPage" resultType="Banner" parameterType="java.lang.Integer">
+        select id,title,imgPath,description,status,createDate from cmfz_banner limit #{page},#{rows}
+    </select>
+
+    <select id="queryTotal" resultType="long">
+        select count(id) from cmfz_banner
+    </select>
+
+    <delete id="deleteOne" parameterType="java.lang.String">
+        delete from cmfz_banner where id=#{id}
+    </delete>
+
+    <insert id="insert" parameterType="Banner">
+        insert into cmfz_banner values (#{id},#{title},#{imgPath},#{description},#{status},#{createDate})
+    </insert>
+
+    <update id="update" parameterType="Banner">
+        update cmfz_banner set title=#{title},imgPath=#{imgPath},description=#{description},status=#{status} where id=#{id}
+    </update>
+
+    <select id="queryOne" resultType="Banner">
+        select id,title,imgPath,description,status,createDate from cmfz_banner where id=#{id}
+    </select>
+
+</mapper>

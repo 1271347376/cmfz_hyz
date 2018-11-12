@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.ArticleDao">
+
+    <insert id="insert" parameterType="Article">
+      insert into cmfz_article values (#{id},#{title},#{imgPath},#{publishDate},#{content},#{guru_id})
+    </insert>
+
+    <resultMap id="ArticleRstMap" type="Article">
+        <id property="id" column="id"></id>
+        <result property="title" column="title"></result>
+        <result property="imgPath" column="imgPath"></result>
+        <result property="publishDate" column="publishDate"></result>
+        <result property="content" column="content"></result>
+        <association property="guru" javaType="Guru">
+            <id property="id" column="g_id"></id>
+            <result property="img" column="img"></result>
+            <result property="name" column="name"></result>
+            <result property="sex" column="sex"></result>
+        </association>
+    </resultMap>
+
+    <select id="queryPage" resultMap="ArticleRstMap">
+      select a.id,a.title,a.imgPath,a.publishDate,a.content,g.id g_id,g.img,g.name,g.sex
+      from cmfz_article a inner join cmfz_guru g
+      on a.guru_id=g.id
+      limit #{page},#{rows}
+    </select>
+
+
+    <select id="queryOne" resultType="Article">
+        select id,title,imgPath,publishDate,content,guru_id from cmfz_article where id=#{id}
+    </select>
+
+    <update id="update" parameterType="Article">
+        update cmfz_article set title=#{title},imgPath=#{imgPath},content=#{content},guru_id=#{guru_id} where id=#{id}
+    </update>
+
+    <delete id="deleteOne" parameterType="java.lang.String">
+        delete from cmfz_article where id=#{id}
+    </delete>
+
+    <delete id="deleteOneByGuruId" parameterType="java.lang.String">
+        delete from cmfz_article where guru_id=#{id}
+    </delete>
+
+
+    <select id="queryTotal" resultType="long">
+        select count(id) from cmfz_article
+    </select>
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.GuruDao">
+
+    <insert id="insert" parameterType="Guru">
+        insert into cmfz_guru values (#{id},#{img},#{name},#{sex})
+    </insert>
+
+
+    <select id="queryPage" resultType="Guru">
+        select id,img,name,sex from cmfz_guru limit #{page},#{rows}
+    </select>
+
+
+    <select id="queryOne" resultType="Guru">
+        select id,img,name,sex from cmfz_guru where id=#{id}
+    </select>
+
+    <update id="update" parameterType="Guru">
+        update cmfz_guru set name=#{name},img=#{img},sex=#{sex} where id=#{id}
+    </update>
+
+    <delete id="deleteOne" parameterType="java.lang.String">
+        delete from cmfz_guru where id=#{id}
+    </delete>
+
+    <select id="queryTotal" resultType="long">
+        select count(id) from cmfz_guru
+    </select>
+
+    <select id="queryAll" resultType="Guru">
+        select id,img,name,sex from cmfz_guru
+    </select>
+
+</mapper>
